@@ -1,0 +1,5 @@
+<h1 class="center">{{merchant.name}}-Punktevergabe</h1>
+<mat-slider min="0" max={{merchant.pointsCurr}} step="1" class="center wide" [thumbLabel]=true [(ngModel)]="value"></mat-slider> 
+<div class="button">
+    <button mat-raised-button color='primary' (click)="updateMerchant()">Punkte vergeben</button>
+</div>

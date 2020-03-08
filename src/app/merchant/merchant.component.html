@@ -1,0 +1,14 @@
+<mat-card *ngFor="let merchant of merchants">
+    <mat-card-header>
+      <mat-card-title>{{merchant.name | uppercase}}</mat-card-title>
+      <mat-card-subtitle>{{merchant.date | date:'dd/MM/yyyy'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        aktuelle Punktzahl: {{merchant.pointsCurr}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="logedIn" align='end'>
+      <button mat-button (click)="onSelect(merchant)">BEWERTUNG</button>
+    </mat-card-actions>
+  </mat-card>

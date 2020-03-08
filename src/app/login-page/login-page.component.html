@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <form class="example-form" submit="loginUser($event)">
+        <mat-form-field class="example-full-width">
+            <mat-label>Benutzername</mat-label>
+            <input matInput placeholder="" [(ngModel)]="username" name="username">
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width">
+            <mat-label>Passwort</mat-label>
+            <input type='password' matInput placeholder="" [(ngModel)]="password" name="password">
+          </mat-form-field>
+
+          <div *ngIf="error" class="error">{{ error }}</div>
+
+          <div class="button">
+            <button mat-raised-button color='primary' (click)="loginUser($event)"><mat-icon>perm_identity</mat-icon>Login</button>
+          </div>
+    </form>
+</mat-card>

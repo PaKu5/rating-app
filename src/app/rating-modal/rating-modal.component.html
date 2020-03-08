@@ -1,0 +1,12 @@
+<h1 class="center">{{merchant.name}} - Bewertung</h1>
+<mat-form-field class="center">
+    <mat-label>Google-Bewertung</mat-label>
+    <mat-select [(ngModel)]="myRating" name="food">
+      <mat-option *ngFor="let rating of ratings" [value]="rating.points">
+        {{rating.value}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="button">
+    <button mat-raised-button color='primary' (click)="updateMerchant()">Bewerten</button>
+</div>

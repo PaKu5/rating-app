@@ -1,0 +1,14 @@
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wide {
+    width: 70%;
+}
