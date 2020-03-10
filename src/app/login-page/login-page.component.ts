@@ -31,9 +31,11 @@ export class LoginPageComponent implements OnInit {
     //offline functionality
     var data = this.Auth.getUserDetailsOffline(this.username, this.password);
     if(data.success) {
-      this.router.navigate(['home'])
-      //alert('Login erfolgreich')
-      this.Auth.setLoggedIn(true)
+      this.Auth.setLoggedIn(true);
+      //this.router.navigate(['home']);
+      alert("Login erfolgreich");
+      this.username='';
+      this.password='';
     } else {
       this.error = data.message;
     }
