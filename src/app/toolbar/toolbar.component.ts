@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnDestroy {
 
-  logedIn:boolean = this.Auth.isLoggedIn;
+  logedIn:boolean = false;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private Auth: AuthService, router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -18,7 +18,11 @@ export class ToolbarComponent implements OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
     
     router.events.subscribe((val) => {
-      this.logedIn = this.Auth.isLoggedIn;
+      if(this.Auth.currentUserValue) {
+        this.logedIn = true;
+      } else {
+        this.logedIn = false;
+      } 
     });
   }
 

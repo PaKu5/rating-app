@@ -13,12 +13,12 @@ import { RatingModalComponent } from '../rating-modal/rating-modal.component';
 export class MerchantComponent implements OnInit {
 
   merchants: Merchant[];
-  logedIn: boolean;
+  logedIn: boolean = false;
 
   constructor(private merchantService: MerchantService, private auth: AuthService,  private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.logedIn = this.auth.isLoggedIn;
+    if(this.auth.currentUserValue) this.logedIn = true;
     this.getMerchants();
   }
 

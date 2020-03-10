@@ -1,47 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-interface myData {
-  success: boolean,
-  message: string
-}
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { User } from '../_models/user';
+
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private loggedInStatus = false;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) { }
-
-  setLoggedIn(value: boolean) {
-    this.loggedInStatus = value;
+  constructor(private http: HttpClient) {
+      this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  get isLoggedIn() {
-    return this.loggedInStatus;
+  public get currentUserValue(): User {
+      return this.currentUserSubject.value;
   }
 
-  getUserDetails(username, password) {
-    return this.http.post<myData>('/api/auth.php', {
-      username,
-      password
-    })
+  login(username, password) {
+      return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+          .pipe(map(user => {
+              // store user details and jwt token in local storage to keep user logged in between page refreshes
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              this.currentUserSubject.next(user);
+              return user;
+          }));
   }
 
-  getUserDetailsOffline(username, password) {
-    const response: myData = {
-      success: false,
-      message: 'foo'
-    }
-    if(username == 'admin' && password == 'admin') {
-      response.success = true;
-      response.message = 'login successful';
-    } else {
-      response.success = false;
-      response.message = 'wrong credentials';
-    }
-    return response;
+  logout() {
+      // remove user from local storage and set current user to null
+      localStorage.removeItem('currentUser');
+      this.currentUserSubject.next(null);
   }
 }

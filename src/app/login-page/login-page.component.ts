@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service'; 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -9,35 +11,46 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-  username:string;
-  password:string;
+  loginForm:FormGroup;
+  returnUrl:string;
   error:string = null;
 
-  constructor(private Auth: AuthService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private auth: AuthService,
+    private route: ActivatedRoute, 
+    private router: Router) { 
+
+      if (this.auth.currentUserValue) {
+        this.router.navigate(['/home']);
+      }
+    }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['',Validators.required],
+      password: ['',Validators.required]
+    });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
   }
 
-  loginUser(event) {
-    /*this.Auth.getUserDetails(this.username, this.password).subscribe(data => {
-      if(data.success) {
-          this.router.navigate(['home'])
-          this.Auth.setLoggedIn(true)
-      } else {
-        window.alert(data.message);
-      }
-    });*/
+  get f() { return this.loginForm.controls; }
 
-    //offline functionality
-    var data = this.Auth.getUserDetailsOffline(this.username, this.password);
-    if(data.success) {
-      this.Auth.setLoggedIn(true);
-      //this.router.navigate(['home']);
-      alert("Login erfolgreich");
-      this.username='';
-      this.password='';
-    } else {
-      this.error = data.message;
+  login() {
+    console.log('foo');
+    if(this.loginForm.invalid) {
+      return;
     }
+    
+    this.auth.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+          data => {
+              this.router.navigate([this.returnUrl]);
+          },
+          error => {
+              this.error = error;
+          });
   }
 }

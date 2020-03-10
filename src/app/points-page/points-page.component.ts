@@ -19,7 +19,7 @@ export class PointsPageComponent implements OnInit {
 
   ngOnInit() {
     this.merchantService.getMerchants().subscribe(merchants => {
-      if(this.auth.isLoggedIn) {
+      if(this.auth.currentUserValue) {
         this.displayedColumns = ['id', 'name', 'date', 'pointsAll', 'pointsSpendEdit', 'pointsCurr'];
       } else {
         this.displayedColumns = ['id', 'name', 'date', 'pointsAll', 'pointsSpend', 'pointsCurr'];
