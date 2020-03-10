@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Merchant } from '../merchant';
-import { MerchantService } from '../merchant.service';
+import { Merchant } from '../_models/merchant';
+import { MerchantService } from '../_services/merchant.service';
 
 @Component({
   selector: 'app-create-modal',

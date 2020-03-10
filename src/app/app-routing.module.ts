@@ -5,8 +5,8 @@ import { MerchantPageComponent } from './merchant-page/merchant-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthService } from './_services/auth.service';
+import { AuthGuard } from './_guards/auth.guard';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { PointsPageComponent } from './points-page/points-page.component';
 

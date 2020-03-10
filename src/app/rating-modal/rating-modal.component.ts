@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Merchant } from '../merchant';
-import { MerchantService } from '../merchant.service';
+import { Merchant } from '../_models/merchant';
+import { MerchantService } from '../_services/merchant.service';
 
 interface Rating {
   value: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Merchant } from '../merchant';
-import { MerchantService } from '../merchant.service';
-import { AuthService } from '../auth.service';
+import { Merchant } from '../_models/merchant';
+import { MerchantService } from '../_services/merchant.service';
+import { AuthService } from '../_services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RatingModalComponent } from '../rating-modal/rating-modal.component';
 

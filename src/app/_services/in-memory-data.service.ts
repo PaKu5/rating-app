@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Merchant } from './merchant';
+import { Merchant } from '../_models/merchant';
 import { Injectable } from '@angular/core';
 
 @Injectable({

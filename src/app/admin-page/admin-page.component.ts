@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Merchant } from '../merchant';
-import { MerchantService } from '../merchant.service';
+import { Merchant } from '../_models/merchant';
+import { MerchantService } from '../_services/merchant.service';
 import { EditModalComponent } from '../edit-modal/edit-modal.component'
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component'
 
