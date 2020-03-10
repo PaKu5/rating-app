@@ -58,6 +58,9 @@ export class MerchantService {
   }
 
   addMerchant(merchant: Merchant): Observable<Merchant> {
+    merchant.pointsAll = 0;
+    merchant.pointsCurr = 0;
+    merchant.pointsSpend = 0;
     return this.http.post<Merchant>(this.merchantsUrl, merchant, this.httpOptions).pipe(
       catchError(this.handleError<Merchant>('addMerchant'))
     );
